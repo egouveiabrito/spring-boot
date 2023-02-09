@@ -9,7 +9,7 @@ import java.util.UUID;
 public class UserDto {
 
     @Null
-    private UUID id;
+    private long id;
 
     @NotNull
     @Max(3)
@@ -23,11 +23,11 @@ public class UserDto {
     @Max(3)
     private String nome;
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         this.id = id;
     }
 

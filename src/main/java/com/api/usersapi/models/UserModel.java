@@ -11,21 +11,21 @@ public class UserModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private long id;
     @Column(nullable = false, unique = true, length = 10)
     private String login;
-    @Column(nullable = false, unique = true, length = 7)
+    @Column(nullable = false, length = 7)
     private String senha;
     @Column(nullable = false)
     private LocalDateTime dataCadastro;
     @Column(nullable = false, length = 130)
     private String nome;
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         this.id = id;
     }
 

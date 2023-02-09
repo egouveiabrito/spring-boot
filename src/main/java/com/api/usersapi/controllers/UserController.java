@@ -28,7 +28,7 @@ public class UserController {
 
     @PostMapping
     @Operation(summary = "Salvar usuario")
-    public ResponseEntity<Object> Save(UserDto userDto){
+    public ResponseEntity<Object> Save(@RequestBody UserDto userDto){
         var userModel = new UserModel();
         BeanUtils.copyProperties(userDto, userModel);
         userModel.setDataCadastro(LocalDateTime.now(ZoneId.of("UTC")));
