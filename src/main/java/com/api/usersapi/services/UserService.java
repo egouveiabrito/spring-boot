@@ -26,7 +26,8 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public Optional<UserModel> FindById(UUID id) {
-        return userRepository.findById(id);
+    public Optional<UserModel> FindById(long id) {
+        var users = userRepository.findAll();
+        return  users.stream().findFirst();
     }
 }

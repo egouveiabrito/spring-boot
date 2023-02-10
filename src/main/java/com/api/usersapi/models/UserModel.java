@@ -1,11 +1,18 @@
 package com.api.usersapi.models;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "TB_USER")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class UserModel implements Serializable {
     private static final long serialVersionUID = 1L;
 

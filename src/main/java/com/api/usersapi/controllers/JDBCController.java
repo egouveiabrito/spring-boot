@@ -13,21 +13,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.UUID;
 import org.springframework.data.domain.Pageable;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/jdbc")
+public class JDBCController {
 
     final UserService userService;
 
-    public UserController(UserService userService) {
+    public JDBCController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping
-    @Operation(summary = "Salvar usuario")
+    @Operation(summary = "Salvar usuario pelo JDBC")
     public ResponseEntity<Object> Save(@RequestBody UserDto userDto){
         var userModel = new UserModel();
         BeanUtils.copyProperties(userDto, userModel);
@@ -42,7 +41,7 @@ public class UserController {
     }
     @GetMapping("/{id}")
     @Operation(summary = "Buscar usuario por Id")
-    public ResponseEntity<Object> FindById(@PathVariable(value = "id") UUID id){
+    public ResponseEntity<Object> FindById(@PathVariable(value = "id") long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.FindById(id));
     }
 }
