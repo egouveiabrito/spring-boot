@@ -10,7 +10,7 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 
 @Configuration
-public class RabbitMQConfig {
+public class UserRabbitConfig {
 
         public static final String USER_SAVE_QUEUE = "save.user.queue";
         public static final String USER_SAVE_EXCHANGE = "user.save.exchange";
@@ -29,6 +29,11 @@ public class RabbitMQConfig {
         DirectExchange exchange() { return new DirectExchange(USER_SAVE_EXCHANGE); }
         @Bean
         Binding binding() { return BindingBuilder.bind(queue()).to(exchange()).with(USER_SAVE_ROUTING_KEY); }
+
+
+
+
+
 
         @Bean
         DirectExchange exchangeDeadLetter() {

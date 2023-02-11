@@ -20,8 +20,5 @@ public class UsersApiApplication {
 		SpringApplication.run(UsersApiApplication.class, args);
 	}
 
-	@Bean
-	public Jackson2JsonMessageConverter converter() {
-		return new Jackson2JsonMessageConverter();
-	}
+
 }
