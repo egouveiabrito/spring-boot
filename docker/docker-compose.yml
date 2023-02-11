@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  rabbitMq:
+   listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3s
+          max-attempts: 1
+          max-interval: 10s
+          multiplier: 2
+    container_name: service-rabbitmq
+    image: rabbitmq:3.9.7-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 45806:15672
+    restart: always
+    environment:
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+    networks:
+      - rabbitmq-service-net
+
+networks:
+  rabbitmq-service-net: { }
