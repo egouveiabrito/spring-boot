@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.support.RetryTemplate;
 
 @Configuration
 public class UserRabbitConfig {
@@ -50,8 +52,14 @@ public class UserRabbitConfig {
         public MessageConverter jsonMessageConverter() { return new Jackson2JsonMessageConverter();  }
 
         public AmqpTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-            final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-            rabbitTemplate.setMessageConverter(jsonMessageConverter());
-            return rabbitTemplate;
+                RabbitTemplate template = new RabbitTemplate(connectionFactory);
+                RetryTemplate retryTemplate = new RetryTemplate();
+                ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
+                backOffPolicy.setInitialInterval(500);
+                backOffPolicy.setMultiplier(10.0);
+                backOffPolicy.setMaxInterval(500);
+                retryTemplate.setBackOffPolicy(backOffPolicy);
+                template.setRetryTemplate(retryTemplate);
+                return template;
         }
     }
